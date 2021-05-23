@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keda-python-rabbit
+  namespace: default
+  labels:
+    app: keda-python-rabbit
+spec:
+  selector:
+    matchLabels:
+      app: keda-python-rabbit
+  template:
+    metadata:
+      labels:
+        app: keda-python-rabbit
+    spec:
+      containers:
+      - name: service
+        image: sricanesh/queue-consumer

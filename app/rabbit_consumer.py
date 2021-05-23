@@ -8,7 +8,7 @@ queue = Queue('keda_demo', exchange, routing_key='keda_demo')
 
 def handle_message(body, message):
     logger.debug(f'Received message: {body!r}')
-    sleep(0.050)
+    sleep(0.2)
     message.ack()
 
 

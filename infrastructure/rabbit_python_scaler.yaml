@@ -1,0 +1,21 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: python-rabbitmq-scaledobject
+  namespace: default
+spec:
+  scaleTargetRef:
+    name: keda-python-rabbit  # nome do deployment onde esta o container a ser executado pela trigger
+  minReplicaCount: 0
+  maxReplicaCount: 10
+  pollingInterval: 5          # intervalo entre um check e outro no Rabbit
+  cooldownPeriod: 30          # tempo em segundos que os pods ficarão no ar depois que a checagem retornar 0 msg na fila
+  triggers:
+    - type: rabbitmq
+      metadata:
+        host: "amqp://user:password@192.168.0.28:5672"
+        mode: QueueLength
+        value: "20"
+        protocol: amqp
+        vhostName: /
+        queueName: keda_demo
