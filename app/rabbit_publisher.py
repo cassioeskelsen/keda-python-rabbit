@@ -1,6 +1,5 @@
 import sys
-
-from kombu import Connection, Producer, Exchange, Queue
+from kombu import Connection, Producer, Exchange
 
 exchange = Exchange('keda_demo', type='direct')
 
